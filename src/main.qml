@@ -86,6 +86,10 @@
 
                 text: qsTr("1.中缀表达式式到后缀表达式的转换")
                 font.pointSize: 13
+
+                onClicked: {
+                    expression.
+                }
             }
             Button{
                 id: btn_2

@@ -13,7 +13,10 @@ find_package(Qt5 REQUIRED COMPONENTS Core Quick)
 add_executable(analytic_expression
         src/main.cpp
         src/main.qml
-        src/qml.qrc)
+        src/qml.qrc src/RPN.cpp
+        src/RPN.h
+        src/DAL.cpp
+        src/DAL.h)
 
 #包括指定的qt模块
 #这个功能相当于qt creator中的QT += <module_name>
