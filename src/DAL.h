@@ -13,7 +13,7 @@ class DAL {
     std::string expression;
 public:
     explicit DAL(std::string expression);
-
+    double evaluate()const;
     RPN parseRPN()const;
 };
 

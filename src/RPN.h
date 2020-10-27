@@ -4,14 +4,18 @@
 
 #ifndef ANALYTIC_EXPRESSION_RPN_H
 #define ANALYTIC_EXPRESSION_RPN_H
+#include <cctype>
+#include <sstream>
 #include <iostream>
-
+#include <stack>
 class RPN {
 public:
 private:
     std::string expression;
 public:
     explicit RPN(std::string expression);
+
+    [[nodiscard]] double evaluate()const;
 
     [[nodiscard]] const std::string &getExpression() const;
 

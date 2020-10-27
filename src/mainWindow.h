@@ -22,6 +22,11 @@ public slots:
 
     void conversion();
 
+    void evaluateRPN();
+
+    void evaluateDAL();
+
+    void getHelp();
 
 private:
     Ui::MainWindow *ui;

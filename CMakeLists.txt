@@ -10,6 +10,9 @@ set(CMAKE_AUTORCC on)
 
 find_package(Qt5 REQUIRED COMPONENTS Core Gui Widgets)
 
+# 屏蔽控制台
+set(CMAKE_EXE_LINKER_FLAGS"${CMAKE_EXE_LINKER_FLAGS} /SUBSYSTEM:WINDOWS /ENTRY:mainCRTStartup")
+
 add_executable(analytic_expression
         src/main.cpp
         src/mainWindow.cpp
