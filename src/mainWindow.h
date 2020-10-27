@@ -7,16 +7,24 @@
 //#include "QtWidgets"
 #include <QMainWindow>
 #include "Ui_mainWindow.h"
+#include "DAL.h"
+#include "RPN.h"
 
-class MainWindow :public QMainWindow{
-    Q_OBJECT
+class MainWindow : public QMainWindow {
+Q_OBJECT
 public:
-    MainWindow(QWidget* parent=nullptr);
+    MainWindow(QWidget *parent = nullptr);
 
     virtual ~MainWindow();
 
+
+public slots:
+
+    void conversion();
+
+
 private:
-    Ui::MainWindow*ui;
+    Ui::MainWindow *ui;
 };
 
 

@@ -12,10 +12,12 @@ find_package(Qt5 REQUIRED COMPONENTS Core Gui Widgets)
 
 add_executable(analytic_expression
         src/main.cpp
-        src/reverse_polish_notation.cpp
-        src/reverse_polish_notation.h
         src/mainWindow.cpp
-        src/mainWindow.h)
+        src/mainWindow.h
+        src/RPN.h
+        src/RPN.cpp
+        src/DAL.h
+        src/DAL.cpp)
 
 # 把对应Qt模块的库链接进程序
 target_link_libraries(${PROJECT_NAME}

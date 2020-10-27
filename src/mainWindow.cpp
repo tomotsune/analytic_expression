@@ -14,3 +14,8 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow() {
     delete ui;
 }
+
+void MainWindow::conversion() {
+    DAL dal{ui->expressionTxt->toPlainText().toStdString()};
+    ui->expressionTxt->setText( QString::fromStdString(dal.parseRPN().getExpression()));
+}
