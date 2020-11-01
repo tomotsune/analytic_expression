@@ -9,99 +9,60 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>381</width>
-    <height>415</height>
+    <width>270</width>
+    <height>90</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QTextEdit" name="expressionTxt">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>20</y>
-      <width>341</width>
-      <height>151</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Agency FB</family>
-      <pointsize>12</pointsize>
-     </font>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="btn_1">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>200</y>
-      <width>221</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>1.DAL-&gt;RPN</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="btn_2">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>240</y>
-      <width>221</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>2.RPN</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="btn_3">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>280</y>
-      <width>221</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>3.DAL</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="btn_4">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>320</y>
-      <width>221</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>4.EXIT</string>
-    </property>
-   </widget>
-  </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>381</width>
-     <height>22</height>
-    </rect>
-   </property>
-   <widget class="QMenu" name="menu">
-    <property name="title">
-     <string>帮助</string>
-    </property>
-    <addaction name="readMe"/>
-   </widget>
-   <addaction name="menu"/>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>Exception</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="lineEdit"/>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <widget class="QComboBox" name="comboBox">
+        <item>
+         <property name="text">
+          <string>1.中缀表达式转后缀表达式</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>2. 后缀表达式求值</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>3. 中缀表达式求值</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="okButton">
+        <property name="text">
+         <string>OK</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="readMe">
@@ -113,90 +74,23 @@
  <resources/>
  <connections>
   <connection>
-   <sender>btn_1</sender>
+   <sender>okButton</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
-   <slot>conversion()</slot>
+   <slot>on_okButton_clicked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>66</x>
-     <y>233</y>
+     <x>223</x>
+     <y>57</y>
     </hint>
     <hint type="destinationlabel">
-     <x>67</x>
-     <y>447</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>btn_2</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>evaluateRPN()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>45</x>
-     <y>273</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>40</x>
-     <y>436</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>btn_3</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>evaluateDAL()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>145</x>
-     <y>312</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>132</x>
-     <y>432</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>btn_4</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>close()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>191</x>
-     <y>356</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>181</x>
-     <y>429</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>readMe</sender>
-   <signal>triggered()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>getHelp()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>26</x>
-     <y>9</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>34</x>
-     <y>428</y>
+     <x>216</x>
+     <y>97</y>
     </hint>
    </hints>
   </connection>
  </connections>
  <slots>
-  <slot>conversion()</slot>
-  <slot>evaluateRPN()</slot>
-  <slot>evaluateDAL()</slot>
-  <slot>getHelp()</slot>
+  <slot>on_okButton_clicked()</slot>
  </slots>
 </ui>

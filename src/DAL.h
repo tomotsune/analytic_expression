@@ -5,16 +5,18 @@
 #ifndef ANALYTIC_EXPRESSION_DAL_H
 #define ANALYTIC_EXPRESSION_DAL_H
 
-#include <iostream>
-#include <stack>
-#include <cctype>
+#include <ostream>
+#include <regex>
 #include "RPN.h"
+class RPN;
 class DAL {
     std::string expression;
 public:
-    explicit DAL(std::string expression);
+    explicit DAL(const std::string& expression);
     double evaluate()const;
     RPN parseRPN()const;
+
+    friend std::ostream &operator<<(std::ostream &os, const DAL &dal);
 };
 
 

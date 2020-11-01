@@ -12,12 +12,14 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QComboBox>
+#include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
-#include <QtWidgets/QMenu>
-#include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QStatusBar>
-#include <QtWidgets/QTextEdit>
+#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -27,13 +29,13 @@ class Ui_MainWindow
 public:
     QAction *readMe;
     QWidget *centralwidget;
-    QTextEdit *expressionTxt;
-    QPushButton *btn_1;
-    QPushButton *btn_2;
-    QPushButton *btn_3;
-    QPushButton *btn_4;
-    QMenuBar *menubar;
-    QMenu *menu;
+    QVBoxLayout *verticalLayout;
+    QHBoxLayout *horizontalLayout;
+    QLabel *label;
+    QLineEdit *lineEdit;
+    QHBoxLayout *horizontalLayout_2;
+    QComboBox *comboBox;
+    QPushButton *okButton;
     QStatusBar *statusbar;
 
     void setupUi(QMainWindow *MainWindow)
@@ -41,50 +43,53 @@ public:
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
         MainWindow->setEnabled(true);
-        MainWindow->resize(381, 415);
+        MainWindow->resize(270, 90);
         readMe = new QAction(MainWindow);
         readMe->setObjectName(QString::fromUtf8("readMe"));
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
-        expressionTxt = new QTextEdit(centralwidget);
-        expressionTxt->setObjectName(QString::fromUtf8("expressionTxt"));
-        expressionTxt->setGeometry(QRect(20, 20, 341, 151));
-        QFont font;
-        font.setFamily(QString::fromUtf8("Agency FB"));
-        font.setPointSize(12);
-        expressionTxt->setFont(font);
-        btn_1 = new QPushButton(centralwidget);
-        btn_1->setObjectName(QString::fromUtf8("btn_1"));
-        btn_1->setGeometry(QRect(20, 200, 221, 23));
-        btn_2 = new QPushButton(centralwidget);
-        btn_2->setObjectName(QString::fromUtf8("btn_2"));
-        btn_2->setGeometry(QRect(20, 240, 221, 23));
-        btn_3 = new QPushButton(centralwidget);
-        btn_3->setObjectName(QString::fromUtf8("btn_3"));
-        btn_3->setGeometry(QRect(20, 280, 221, 23));
-        btn_4 = new QPushButton(centralwidget);
-        btn_4->setObjectName(QString::fromUtf8("btn_4"));
-        btn_4->setGeometry(QRect(20, 320, 221, 23));
+        verticalLayout = new QVBoxLayout(centralwidget);
+        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        label = new QLabel(centralwidget);
+        label->setObjectName(QString::fromUtf8("label"));
+
+        horizontalLayout->addWidget(label);
+
+        lineEdit = new QLineEdit(centralwidget);
+        lineEdit->setObjectName(QString::fromUtf8("lineEdit"));
+
+        horizontalLayout->addWidget(lineEdit);
+
+
+        verticalLayout->addLayout(horizontalLayout);
+
+        horizontalLayout_2 = new QHBoxLayout();
+        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        comboBox = new QComboBox(centralwidget);
+        comboBox->addItem(QString());
+        comboBox->addItem(QString());
+        comboBox->addItem(QString());
+        comboBox->setObjectName(QString::fromUtf8("comboBox"));
+
+        horizontalLayout_2->addWidget(comboBox);
+
+        okButton = new QPushButton(centralwidget);
+        okButton->setObjectName(QString::fromUtf8("okButton"));
+
+        horizontalLayout_2->addWidget(okButton);
+
+
+        verticalLayout->addLayout(horizontalLayout_2);
+
         MainWindow->setCentralWidget(centralwidget);
-        menubar = new QMenuBar(MainWindow);
-        menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 381, 22));
-        menu = new QMenu(menubar);
-        menu->setObjectName(QString::fromUtf8("menu"));
-        MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));
         MainWindow->setStatusBar(statusbar);
 
-        menubar->addAction(menu->menuAction());
-        menu->addAction(readMe);
-
         retranslateUi(MainWindow);
-        QObject::connect(btn_1, SIGNAL(clicked()), MainWindow, SLOT(conversion()));
-        QObject::connect(btn_2, SIGNAL(clicked()), MainWindow, SLOT(evaluateRPN()));
-        QObject::connect(btn_3, SIGNAL(clicked()), MainWindow, SLOT(evaluateDAL()));
-        QObject::connect(btn_4, SIGNAL(clicked()), MainWindow, SLOT(close()));
-        QObject::connect(readMe, SIGNAL(triggered()), MainWindow, SLOT(getHelp()));
+        QObject::connect(okButton, SIGNAL(clicked()), MainWindow, SLOT(on_okButton_clicked()));
 
         QMetaObject::connectSlotsByName(MainWindow);
     } // setupUi
@@ -93,11 +98,12 @@ public:
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
         readMe->setText(QCoreApplication::translate("MainWindow", "readMe", nullptr));
-        btn_1->setText(QCoreApplication::translate("MainWindow", "1.DAL->RPN", nullptr));
-        btn_2->setText(QCoreApplication::translate("MainWindow", "2.RPN", nullptr));
-        btn_3->setText(QCoreApplication::translate("MainWindow", "3.DAL", nullptr));
-        btn_4->setText(QCoreApplication::translate("MainWindow", "4.EXIT", nullptr));
-        menu->setTitle(QCoreApplication::translate("MainWindow", "\345\270\256\345\212\251", nullptr));
+        label->setText(QCoreApplication::translate("MainWindow", "Exception", nullptr));
+        comboBox->setItemText(0, QCoreApplication::translate("MainWindow", "1.\344\270\255\347\274\200\350\241\250\350\276\276\345\274\217\350\275\254\345\220\216\347\274\200\350\241\250\350\276\276\345\274\217", nullptr));
+        comboBox->setItemText(1, QCoreApplication::translate("MainWindow", "2. \345\220\216\347\274\200\350\241\250\350\276\276\345\274\217\346\261\202\345\200\274", nullptr));
+        comboBox->setItemText(2, QCoreApplication::translate("MainWindow", "3. \344\270\255\347\274\200\350\241\250\350\276\276\345\274\217\346\261\202\345\200\274", nullptr));
+
+        okButton->setText(QCoreApplication::translate("MainWindow", "OK", nullptr));
     } // retranslateUi
 
 };

@@ -15,26 +15,20 @@ MainWindow::~MainWindow() {
     delete ui;
 }
 
-void MainWindow::conversion() {
-    DAL dal{ui->expressionTxt->toPlainText().toStdString()};
-    ui->expressionTxt->setText( QString::fromStdString(dal.parseRPN().getExpression()));
-}
+void MainWindow::on_okButton_clicked() {
 
-void MainWindow::evaluateRPN() {
-    RPN rpn{ui->expressionTxt->toPlainText().toStdString()};
-    ui->expressionTxt->setText( QString::number(rpn.evaluate(),10,4));
-}
-
-void MainWindow::evaluateDAL() {
-    DAL dal{ui->expressionTxt->toPlainText().toStdString()};
-    ui->expressionTxt->setText( QString::number(dal.evaluate(),10,4));
-}
-
-void MainWindow::getHelp() {
-    ui->expressionTxt->setText(" 1.When you use function 1,the input must consist of letters "
-                               "and operators,and cannot contain spaces "
-                               "2.When using function 2, the input can be multiple floating-point numbers "
-                               "and separated by spaces"
-                               "3.When you use function 3, the input must consist of 0-9 integer numbers "
-                               "and operators,and cannot contain spaces");
+    auto exp{ui->lineEdit->text().toStdString()};
+    std::cout<<exp;
+    std::cout<<ui->comboBox->currentIndex();
+    switch (ui->comboBox->currentIndex()) {
+        case 0:
+            ui->lineEdit->setText(QString::fromStdString(DAL{exp}.parseRPN().getExpression()));
+            break;
+        case 1:
+            ui->lineEdit->setText(QString::number(RPN{exp}.evaluate(), 10, 4));
+            break;
+        case 2:
+            ui->lineEdit->setText(QString::number(DAL{exp}.evaluate(), 10, 4));
+            break;
+    }
 }

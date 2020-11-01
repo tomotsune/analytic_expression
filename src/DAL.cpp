@@ -6,7 +6,12 @@
 
 #include <utility>
 
-DAL::DAL(std::string expression) : expression(std::move(expression)) {}
+DAL::DAL(const std::string &expression)
+:expression(std::regex_replace(expression, std::regex{"\\s"},"")){
+    //auto qExp{QString::fromStdString(expression)};
+    //DAL::expression = qExp.remove(QRegExp{"//s"}).toStdString();
+    //qExp = qExp.simplified();
+}
 
 RPN DAL::parseRPN() const {
     std::stack<char> s;
@@ -48,6 +53,7 @@ RPN DAL::parseRPN() const {
     }
     return RPN{rpn};
 }
+
 
 double DAL::evaluate() const {
     std::stack<int> num_stack;
@@ -127,5 +133,10 @@ double DAL::evaluate() const {
 
         }
     }
-        return num_stack.top();
+    return num_stack.top();
+}
+
+std::ostream &operator<<(std::ostream &os, const DAL &dal) {
+    os << "expression: " << dal.expression;
+    return os;
 }

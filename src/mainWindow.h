@@ -6,6 +6,8 @@
 #define ANALYTIC_EXPRESSION_MAINWINDOW_H
 //#include "QtWidgets"
 #include <QMainWindow>
+#include <QString>
+#include <QRegExp>
 #include "Ui_mainWindow.h"
 #include "DAL.h"
 #include "RPN.h"
@@ -20,13 +22,7 @@ public:
 
 public slots:
 
-    void conversion();
-
-    void evaluateRPN();
-
-    void evaluateDAL();
-
-    void getHelp();
+   void on_okButton_clicked();
 
 private:
     Ui::MainWindow *ui;

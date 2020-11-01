@@ -10,17 +10,17 @@ set(CMAKE_AUTORCC on)
 
 find_package(Qt5 REQUIRED COMPONENTS Core Gui Widgets)
 
-# 屏蔽控制台
-set(CMAKE_EXE_LINKER_FLAGS"${CMAKE_EXE_LINKER_FLAGS} /SUBSYSTEM:WINDOWS /ENTRY:mainCRTStartup")
+#[[# 屏蔽控制台
+set(CMAKE_EXE_LINKER_FLAGS"${CMAKE_EXE_LINKER_FLAGS} /SUBSYSTEM:WINDOWS /ENTRY:mainCRTStartup")]]
 
 add_executable(analytic_expression
         src/main.cpp
         src/mainWindow.cpp
         src/mainWindow.h
-        src/RPN.h
-        src/RPN.cpp
         src/DAL.h
-        src/DAL.cpp)
+        src/DAL.cpp
+        src/RPN.h
+        src/RPN.cpp)
 
 # 把对应Qt模块的库链接进程序
 target_link_libraries(${PROJECT_NAME}

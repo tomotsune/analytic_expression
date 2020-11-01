@@ -8,12 +8,13 @@
 #include <sstream>
 #include <iostream>
 #include <stack>
+#include "mainWindow.h"
 class RPN {
 public:
 private:
     std::string expression;
 public:
-    explicit RPN(std::string expression);
+    explicit RPN(const std::string& expression);
 
     [[nodiscard]] double evaluate()const;
 
