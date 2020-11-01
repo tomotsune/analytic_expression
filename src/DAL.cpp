@@ -14,9 +14,9 @@ RPN DAL::parseRPN() const {
     std::stack<char> s;
     std::string rpn{};
 
-    std::regex reg{R"(\d+\.\d+|\d+|[*-/+])"};
+    std::regex reg{R"(\d+\.\d+|\d+|[*-/+()])"};
     for (std::sregex_token_iterator it{exp.begin(), exp.end(), reg}, end; it != end; ++it) {
-        if (std::regex_match(it->str(), std::regex{"[*-/+]"})) {
+        if (std::regex_match(it->str(), std::regex{"[*-/+()]"})) {
             auto first_char{it->str()[0]};
             if (first_char == '(') {
                 s.push(first_char);
@@ -57,9 +57,9 @@ double DAL::evaluate() const {
     std::stack<double> num_stack;
     std::stack<char> oper_stack;
 
-    std::regex reg{R"(\d+\.\d+|\d+|[*-/+])"};
+    std::regex reg{R"(\d+\.\d+|\d+|[*-/+()])"};
     for (std::sregex_token_iterator it{exp.begin(), exp.end(), reg}, end; it != end; ++it) {
-        if (std::regex_match(it->str(), std::regex{"[*-/+]"})) {
+        if (std::regex_match(it->str(), std::regex{"[*-/+()]"})) {
             auto first_char{it->str()[0]};
             if (first_char == '(') {
                 oper_stack.push(first_char);
