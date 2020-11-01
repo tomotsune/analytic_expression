@@ -87,9 +87,11 @@ public:
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));
         MainWindow->setStatusBar(statusbar);
+#if QT_CONFIG(shortcut)
+        label->setBuddy(lineEdit);
+#endif // QT_CONFIG(shortcut)
 
         retranslateUi(MainWindow);
-        QObject::connect(okButton, SIGNAL(clicked()), MainWindow, SLOT(on_okButton_clicked()));
 
         QMetaObject::connectSlotsByName(MainWindow);
     } // setupUi
@@ -104,6 +106,9 @@ public:
         comboBox->setItemText(2, QCoreApplication::translate("MainWindow", "3. \344\270\255\347\274\200\350\241\250\350\276\276\345\274\217\346\261\202\345\200\274", nullptr));
 
         okButton->setText(QCoreApplication::translate("MainWindow", "OK", nullptr));
+#if QT_CONFIG(shortcut)
+        okButton->setShortcut(QCoreApplication::translate("MainWindow", "Return", nullptr));
+#endif // QT_CONFIG(shortcut)
     } // retranslateUi
 
 };

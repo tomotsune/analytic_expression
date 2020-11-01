@@ -8,6 +8,7 @@
 #include <QMainWindow>
 #include <QString>
 #include <QRegExp>
+#include <QtDebug>
 #include "Ui_mainWindow.h"
 #include "DAL.h"
 #include "RPN.h"
@@ -18,7 +19,6 @@ public:
     MainWindow(QWidget *parent = nullptr);
 
     virtual ~MainWindow();
-
 
 public slots:
 

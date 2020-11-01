@@ -8,7 +8,7 @@
 
 
 RPN::RPN(const std::string &exp) {
-    std::regex reg{"\\d+|[*-/+]+"};
+    std::regex reg{R"(\d+\.\d+|\d+|[*-/+])"};
     for (std::sregex_token_iterator it{exp.begin(), exp.end(), reg}, end; it != end; ++it) {
         it->str().push_back(' ');
         RPN::exp.append(*it).push_back(' ');
@@ -27,11 +27,10 @@ const std::string &RPN::getExpression() const {
 
 double RPN::evaluate() const {
     std::stack<double> s;
-    std::regex reg{"\\s+"};
-    for (std::sregex_token_iterator it{exp.begin(), exp.end(), reg,-1}, end; it != end; ++it) {
-        if (std::regex_match(it->str(), std::regex{"\\d+"})) {
-            s.push(stod(*it));
-        } else {
+    std::regex reg{R"(\d+\.\d+|\d+|[*-/+])"};
+    for (std::sregex_token_iterator it{exp.begin(), exp.end(), reg}, end; it != end; ++it) {
+        if (std::regex_match(it->str(), std::regex{"[*-/+]"})) {
+
             auto right{s.top()};
             s.pop();
             auto left{s.top()};
@@ -50,6 +49,8 @@ double RPN::evaluate() const {
                     s.push(left / right);
                     break;
             }
+        } else {
+            s.push(stod(*it));
         }
 
     }

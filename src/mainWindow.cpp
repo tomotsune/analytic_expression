@@ -16,17 +16,22 @@ MainWindow::~MainWindow() {
 }
 
 void MainWindow::on_okButton_clicked() {
-
+    qDebug()<<"被点击";
     auto exp{ui->lineEdit->text().toStdString()};
+    QString text{};
     switch (ui->comboBox->currentIndex()) {
         case 0:
-            ui->lineEdit->setText(QString::fromStdString(DAL{exp}.parseRPN().getExpression()));
+            text=QString::fromStdString(DAL{exp}.parseRPN().getExpression());
             break;
         case 1:
-            ui->lineEdit->setText(QString::number(RPN{exp}.evaluate(), 10, 4));
+            text=QString::number(RPN{exp}.evaluate(), 10, 4);
             break;
         case 2:
-            ui->lineEdit->setText(QString::number(DAL{exp}.evaluate(), 10, 4));
+            text=QString::number(DAL{exp}.evaluate(), 10, 4);
+            break;
+        default:
             break;
     }
+    qDebug()<<text;
+    ui->lineEdit->setText(text);
 }
