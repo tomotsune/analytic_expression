@@ -5,14 +5,14 @@
 #ifndef ANALYTIC_EXPRESSION_DAL_H
 #define ANALYTIC_EXPRESSION_DAL_H
 
-#include <ostream>
+#include <iostream>
 #include <regex>
 #include "RPN.h"
 class RPN;
 class DAL {
-    std::string expression;
+    std::string exp;
 public:
-    explicit DAL(const std::string& expression);
+    explicit DAL(const std::string& exp);
     double evaluate()const;
     RPN parseRPN()const;
 

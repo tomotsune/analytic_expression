@@ -6,47 +6,44 @@
 
 #include <utility>
 
-DAL::DAL(const std::string &expression)
-:expression(std::regex_replace(expression, std::regex{"\\s"},"")){
-    //auto qExp{QString::fromStdString(expression)};
-    //DAL::expression = qExp.remove(QRegExp{"//s"}).toStdString();
-    //qExp = qExp.simplified();
+DAL::DAL(const std::string &exp)
+        : exp(std::regex_replace(exp, std::regex{"\\s"}, "")) {
 }
 
 RPN DAL::parseRPN() const {
     std::stack<char> s;
     std::string rpn{};
-    for (const auto &item : expression) {
-        if (isalnum(item)) {
 
-            rpn.push_back(item);
+    std::regex reg{"\\d+|[*-/+]+"};
+    for (std::sregex_token_iterator it{exp.begin(), exp.end(), reg}, end; it != end; ++it) {
+        if (std::regex_match(it->str(), std::regex{"\\d+"})) {
+            rpn.append(*it).push_back(' ');
         } else {
-            if (item == '(') {
-                s.push(item);
-            } else if (item == ')') {
+            auto first_char{it->str()[0]};
+            if (first_char == '(') {
+                s.push(first_char);
+            } else if (first_char == ')') {
                 while (!s.empty() && s.top() != '(') {
                     rpn.push_back(s.top());
                     s.pop();
                 }
                 s.pop();
-            } else if (item == '+' || item == '-') {
+            } else if (first_char == '+' || first_char == '-') {
                 while (!s.empty() && s.top() != '(') {
                     rpn.push_back(s.top());
                     s.pop();
                 }
-                s.push(item);
+                s.push(first_char);
             } else {
                 while (!s.empty() && (s.top() == '*' || s.top() == '/')) {
                     rpn.push_back(s.top());
                     s.pop();
                 }
-                s.push(item);
-
-
+                s.push(first_char);
             }
         }
-
     }
+
     while (!s.empty()) {
         rpn.push_back(s.top());
         s.pop();
@@ -58,7 +55,7 @@ RPN DAL::parseRPN() const {
 double DAL::evaluate() const {
     std::stack<int> num_stack;
     std::stack<char> oper_stack;
-    for (const auto &item : expression) {
+    for (const auto &item : exp) {
         if (isdigit(item)) {
             num_stack.push(std::stoi(std::string{item}));
         } else {
@@ -137,6 +134,6 @@ double DAL::evaluate() const {
 }
 
 std::ostream &operator<<(std::ostream &os, const DAL &dal) {
-    os << "expression: " << dal.expression;
+    os << "exp: " << dal.exp;
     return os;
 }

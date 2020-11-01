@@ -18,8 +18,6 @@ MainWindow::~MainWindow() {
 void MainWindow::on_okButton_clicked() {
 
     auto exp{ui->lineEdit->text().toStdString()};
-    std::cout<<exp;
-    std::cout<<ui->comboBox->currentIndex();
     switch (ui->comboBox->currentIndex()) {
         case 0:
             ui->lineEdit->setText(QString::fromStdString(DAL{exp}.parseRPN().getExpression()));
